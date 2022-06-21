@@ -1,0 +1,23 @@
+name: Deploy Eleventy via SSH
+
+on:
+  push:
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@master
+         - name: Build Eleventy
+           uses: TartanLlama/actions-eleventy@master
+           with:
+             args: --output html
+             install_dependencies: true
+         - name: Copying files to server
+           uses: appleboy/scp-action@master
+           with:
+             host: 3.109.54.100
+             username: ubuntu
+             key: ${{ secrets.SECRET }}
+             rm: true
+             source: "workflow/task"
+             target: "/var/www/html"
