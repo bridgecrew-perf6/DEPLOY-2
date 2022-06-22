@@ -16,9 +16,9 @@ jobs:
       - name: Copying files to server
         uses: appleboy/scp-action@master
         with:
-          host: ec2-3-109-54-100.ap-south-1.compute.amazonaws.com
+          host: 34.220.137.151
           username: ubuntu
           key: ${{ secrets.SECRET }}
           rm: true
-          source: "workflow/task"
+          source: "DEPLOY/workflow/task"
           target: "/var/www/html"
